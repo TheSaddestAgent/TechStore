@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "${NGINX_PORT}:${NGINX_PORT}"  
+    env_file:
+      - ./.env
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - api-gateway
+    networks:
+      - app-network
+
+  api-gateway:
+    build: 
+      context: .
+      dockerfile: ./api-gateway/Dockerfile
+    expose:
+      - "${GATEWAY_PORT}"  
+    env_file:
+      - ./.env
+    depends_on:
+      #- auth-service
+      - product-service
+    networks:
+      - app-network
+    environment:
+      #- AUTH_SERVICE_URL=http://auth-service:${AUTH_PORT}
+      - PRODUCT_SERVICE_URL=http://product-service:${PRODUCT_PORT}
+  
+  #auth-service:
+   # build: 
+  #    context: .
+   #   dockerfile: ./auth-service/Dockerfile
+   # expose:
+   #   - "${AUTH_PORT}"
+   # env_file:
+   #   - ./.env
+   # networks:
+   #   - app-network
+
+  product-service:
+    build: 
+      context: .
+      dockerfile: ./product-service/Dockerfile
+    env_file:
+      - ./.env
+    expose:
+      - "${PRODUCT_PORT}"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
