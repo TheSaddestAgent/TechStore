@@ -4,8 +4,10 @@ WORKDIR /app
 
 COPY . .
 
-RUN cd auth-service && go build -o auth-service .
+RUN go build -o auth-app ./auth-service
 
 EXPOSE 8081
 
-CMD ["./auth-service"]
+RUN chmod +x auth-app
+
+CMD ["./auth-app"]

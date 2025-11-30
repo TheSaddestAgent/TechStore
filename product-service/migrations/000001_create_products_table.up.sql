@@ -38,6 +38,6 @@ INSERT INTO products (name, description, category, brand, model, price, stock, i
 ('iPhone 15 Pro', 'Latest Apple smartphone with A17 Pro chip', 'smartphone', 'Apple', 'iPhone 15 Pro', 999.99, 50, 'https://example.com/iphone15pro.jpg'),
 ('MacBook Air M2', 'Lightweight laptop with Apple M2 chip', 'laptop', 'Apple', 'MacBook Air M2', 1199.99, 30, 'https://example.com/macbook-air-m2.jpg'),
 ('Galaxy S23', 'Samsung flagship smartphone', 'smartphone', 'Samsung', 'Galaxy S23', 799.99, 75, 'https://example.com/galaxy-s23.jpg'),
-('ThinkPad X1', Business laptop from Lenovo', 'laptop', 'Lenovo', 'ThinkPad X1', 1299.99, 25, 'https://example.com/thinkpad-x1.jpg'),
+('ThinkPad X1', 'Business laptop from Lenovo', 'laptop', 'Lenovo', 'ThinkPad X1', 1299.99, 25, 'https://example.com/thinkpad-x1.jpg'),
 ('iPad Air', 'Versatile tablet from Apple', 'tablet', 'Apple', 'iPad Air', 599.99, 40, 'https://example.com/ipad-air.jpg')
 ON CONFLICT DO NOTHING;

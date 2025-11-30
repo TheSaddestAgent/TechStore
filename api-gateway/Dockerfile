@@ -4,8 +4,10 @@ WORKDIR /app
 
 COPY . .
 
-RUN cd api-gateway && go build -o api-gateway .
+RUN go build -o api-gateway-app ./api-gateway
 
 EXPOSE 8080
 
-CMD ["./api-gateway"]
+RUN chmod +x api-gateway-app
+
+CMD ["./api-gateway-app"]

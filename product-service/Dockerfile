@@ -4,8 +4,16 @@ WORKDIR /app
 
 COPY . .
 
-RUN cd product-service && go build -o /product-service .
+COPY product-service/migrations/ /app/migrations/
+
+COPY product-service/entrypoint.sh .
+
+RUN go build -o product-app ./product-service/main.go
+
+RUN go build -o migrate-app ./product-service/migrate/main.go
+
+RUN chmod +x product-app migrate-app
 
 EXPOSE 8082
 
-CMD ["./product-service"]
+CMD ["./entrypoint.sh"]
